@@ -8,10 +8,17 @@ function getAll($table)
     return $run = mysqli_query($con, $sql);
 }
 
+
 function getByID($table, $id)
 {
     global $con;
     $sql = "SELECT * FROM $table WHERE category_id = '$id'";
+    return $run = mysqli_query($con, $sql);
+}
+function getBlogByID($id)
+{
+    global $con;
+    $sql = "SELECT * FROM blog WHERE blog_id = '$id'";
     return $run = mysqli_query($con, $sql);
 }
 
