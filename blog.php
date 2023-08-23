@@ -1,7 +1,17 @@
 <?php
+include("Includes/loader.php");
+include("Functions/userFunction.php");
 include("Includes/header.php");
-include("Includes/loader.php")
+include("Database/Connect.php");
+// Định nghĩa số bài blog hiển thị trên mỗi trang
+$blogsPerPage = 3;
+// Lấy trang hiện tại từ URL
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Tính chỉ số bắt đầu của bài blog hiển thị trên trang này
+$startIndex = ($currentPage - 1) * $blogsPerPage;
+$blog = getBlogLimited($startIndex, $blogsPerPage);
 ?>
+
 
 <body>
 	<div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
@@ -20,96 +30,71 @@ include("Includes/loader.php")
 			<div class="row">
 				<div class="col-lg-8 order-lg-last ftco-animate">
 					<div class="row">
+					<?php
+					foreach ($blog as $p) {
+					?>
 						<div class="col-md-12 d-flex ftco-animate">
 							<div class="blog-entry align-self-stretch d-md-flex">
-								<a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+							<a href="blog-single.php?id=<?= $p['blog_id'] ?>" class="block-20" style="background-image: url('Assets/<?= $p['image'] ?>');">
 								</a>
 								<div class="text d-block pl-md-4">
 									<div class="meta mb-3">
-										<div><a href="#">April 9, 2019</a></div>
-										<div><a href="#">Admin</a></div>
-										<div><a href="" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+										<div><a href="#">Đăng bởi Admin</a></div>
+										<div><a href="#">, Vào lúc <?= $p['created_at'] ?></a></div>
+										<!-- <div><a href="" class="meta-chat"><span class="icon-chat"></span> 3</a></div> -->
 									</div>
-									<h3 class="heading"><a href="blog-single.php">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-									<p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>
+									<h2 class="heading"><a href="blog-single.php?id=<?= $p['blog_id'] ?>"></a><?= $p['title'] ?></h2>
+									<p><?php echo substr(strip_tags($p['content']), 0, 140) ?> ...v...v...</p>
+									<p><a href="blog-single.php?id=<?= $p['blog_id'] ?>" class="btn btn-primary py-2 px-3">Read more</a></p>
 								</div>
 							</div>
 						</div>
+						<?php
+					}
+					?>
 					</div>
 					<div class="row mt-2">
-						<div class="col">
-							<div class="block-27">
-								<ul>
-									<li><a href="#">&lt;</a></li>
-									<li class="active"><span>1</span></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&gt;</a></li>
-								</ul>
-							</div>
-						</div>
+					<div class="col">
+    <div class="block-27">
+        <ul>
+            <!-- Generate pagination links -->
+            <?php
+            $totalPages = ceil(countBlogs() / $blogsPerPage);
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $activeClass = ($i == $currentPage) ? "active" : "";
+                echo '<li class="' . $activeClass . '"><a href="?page=' . $i . '">' . $i . '</a></li>';
+            }
+            ?>
+        </ul>
+    </div>
+</div>
 					</div>
 				</div>
 				<div class="col-lg-4 sidebar ftco-animate">
-					<div class="sidebar-box">
-						<form action="#" class="search-form">
-							<div class="form-group">
-								<span class="icon ion-ios-search"></span>
-								<input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-							</div>
-						</form>
-					</div>
-					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Categories</h3>
-						<ul class="categories">
-							<li><a href="#">Shoes <span>(12)</span></a></li>
-							<li><a href="#">Men's Shoes <span>(22)</span></a></li>
-							<li><a href="#">Women's <span>(37)</span></a></li>
-							<li><a href="#">Accessories <span>(42)</span></a></li>
-							<li><a href="#">Sports <span>(14)</span></a></li>
-							<li><a href="#">Lifestyle <span>(140)</span></a></li>
-						</ul>
-					</div>
+				<div class="sidebar-box ftco-animate">
+    <h3 class="heading">Recent Blog</h3>
+    
+    <?php
+    
+    $recentBlogs = getRecentBlogs();
 
-					<div class="sidebar-box ftco-animate">
-						<h3 class="heading">Recent Blog</h3>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-							<div class="text">
-								<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-									<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-									<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-							<div class="text">
-								<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-									<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-									<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-						<div class="block-21 mb-4 d-flex">
-							<a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-							<div class="text">
-								<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<div class="meta">
-									<div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-									<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-									<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-								</div>
-							</div>
-						</div>
-					</div>
+    foreach ($recentBlogs as $blog) {
+    ?>
+    <div class="block-21 mb-4 d-flex">
+        <a class="blog-img mr-4" style="background-image: url('Assets/<?= $blog['image'] ?>');"></a>
+        <div class="text">
+            <h3 class="heading-1"><a href="blog-single.php?id=<?= $blog['blog_id']; ?>"><?= $blog['title']; ?></a></h3>
+            <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> <?= $blog['created_at']; ?></a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+            </div>
+        </div>
+    </div>
+    <?php
+    }
+    ?>
+    
+</div>
 
 					<div class="sidebar-box ftco-animate">
 						<h3 class="heading">Tag Cloud</h3>

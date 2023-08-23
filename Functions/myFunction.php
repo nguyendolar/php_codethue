@@ -98,6 +98,8 @@ function getProductsWithImages($product_id = null)
     return $data;
 }
 
+
+
 function associateProductImage($product_id, $image_filename, $con) {
     $sql = "INSERT INTO product_image (product_id, image_source) VALUES ('$product_id', '$image_filename')";
     mysqli_query($con, $sql);

@@ -37,7 +37,7 @@ include("../Functions/myFunction.php")
                                         </div>
                                         <div class="col-md-12">
                                             <label for="">Content:</label>
-                                            <textarea name="content" placeholder="Enter content" class="form-control" cols="30" rows="10"><?= $data['content'] ?></textarea>
+                                            <textarea id="editor" name="content" placeholder="Enter content" class="form-control" cols="30" rows="30"><?= $data['content'] ?></textarea>
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary" name="update_blog">Update</button>
@@ -57,7 +57,9 @@ include("../Functions/myFunction.php")
             </div>
         </div>
 </main>
-
+<script>
+    CKEDITOR.replace("editor");
+    </script>
 <?php
 include("Includes/footer.php");
 ?>

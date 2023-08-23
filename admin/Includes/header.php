@@ -13,6 +13,7 @@
     <!-- Alertify -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <script src="ckeditor/ckeditor.js"></script>
     <title>Dashboard</title>
 </head>
 

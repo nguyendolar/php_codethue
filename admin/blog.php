@@ -30,15 +30,16 @@ include("Includes/header.php");
                                 $blog = getAll("blog");
                                 if (mysqli_num_rows($blog) > 0) {
                                     foreach ($blog as $items) {
+                                         $idModelDes = "exampleModalDes".$items["blog_id"] ;
                                 ?>
                                         <tr>
                                             <td><?= $items['blog_id']; ?></td>
-                                            <td><img src="../Assets/<?= $items['image']; ?>" width="50px" height="50px" alt=""></td>
+                                            <td><img src="../Assets/<?= $items['image']; ?>" width="150px" height="100px" alt=""></td>
                                             <td><?= $items['title']; ?></td>
                                             <td>
                                             <a href="" data-bs-toggle="modal"
                                                 data-bs-target="#<?php echo $idModelDes ?>">
-                                                Xem</a>
+                                                View</a>
                                             </td>
                                             <td><?= $items['created_at']; ?></td>
                                             <td>
@@ -51,6 +52,24 @@ include("Includes/header.php");
                                                 </form>
                                             </td>
                                         </tr>
+                                        <!--Des-->
+                                            <div class="modal fade" id="<?php echo $idModelDes ?>" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel"><?php echo $items["title"] ?></h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <?php echo $items["content"] ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Dele-->
                                 <?php
                                     }
                                 } else {
