@@ -25,7 +25,7 @@ $noidung = '<strong>Name : </strong> '.$name.'<br><strong>Email : </strong> '.$e
             $mail->SMTPSecure = 'ssl';                            
             $mail->Port = SMTP_PORT;                                   
             $mail->setFrom(SMTP_UNAME, "MINISHOP");
-            $mail->addAddress("nguyencaonguyencmu@gmail.com", "Nguyen");     
+            $mail->addAddress("thanhnghia122004@gmail.com", "Chủ Shop");     
             $mail->addReplyTo(SMTP_UNAME, 'MINISHOP');
             $mail->isHTML(true);                                  
             $mail->Subject = 'Feedback';
