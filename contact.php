@@ -55,7 +55,7 @@ include("Includes/loader.php")
               <textarea id="" cols="30" rows="7" name="noidung" class="form-control" placeholder="Message"></textarea>
             </div>
             <div class="form-group">
-              <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+              <input type="submit" name="contact" value="Send Message" class="btn btn-primary py-3 px-5">
             </div>
           </form>
 

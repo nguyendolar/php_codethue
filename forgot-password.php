@@ -21,21 +21,15 @@ include("Includes/header.php");
                 <?php unset($_SESSION['message']); } ?>
                 <div class="card">
                     <div class="card-header">
-                        <h4>Login</h4>
+                        <h4>Forgot Password</h4>
                     </div>
                     <div class="card-body">
-                        <form action="Functions/authcode.php" method="POST">
+                        <form action="xuly.php" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Enter Email to reset password" required>
                                 <label for="floatingInput">Email address</label>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" name="password" class="form-control" id="floatingInput" placeholder="password" required>
-                                <label for="floatingInput">Password</label>
-                            </div>
-                            <button type="submit" name="login-btn" class="btn btn-primary">Login</button>
-                            <a href="register.php" class="btn btn-primary">Register</a>
-                            <a href="forgot-password.php" class="btn btn-primary" style="float: right;">Forgot Password</a>
+                            <button type="submit" name="forgot" class="btn btn-primary">Send Email</button>
                         </form>
                     </div>
                 </div>

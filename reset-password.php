@@ -9,6 +9,9 @@ if(isset($_SESSION['auth'])){
 
 include("Includes/header.php");
 ?>
+ <?php
+$email = $_GET["email"];
+?>
 <div class="py-5">
     <div class="container">
         <div class="row justify-content-center">
@@ -21,21 +24,20 @@ include("Includes/header.php");
                 <?php unset($_SESSION['message']); } ?>
                 <div class="card">
                     <div class="card-header">
-                        <h4>Login</h4>
+                        <h4>Reset Password</h4>
                     </div>
                     <div class="card-body">
-                        <form action="Functions/authcode.php" method="POST">
-                            <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-                                <label for="floatingInput">Email address</label>
+                        <form action="xuly.php" method="POST">
+                        <div class="form-floating mb-3">
+                                <input type="password" name="newpassword" class="form-control" id="floatingInput" placeholder="New Password" required>
+                                <input type="hidden" name="email" class="form-control" id="floatingInput" value="<?= $email ?>">
+                                <label for="floatingInput">New Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" name="password" class="form-control" id="floatingInput" placeholder="password" required>
-                                <label for="floatingInput">Password</label>
+                                <input type="password" name="confirmpassword" class="form-control" id="floatingInput" placeholder="Confirm Password" required>
+                                <label for="floatingInput">Confirm Password</label>
                             </div>
-                            <button type="submit" name="login-btn" class="btn btn-primary">Login</button>
-                            <a href="register.php" class="btn btn-primary">Register</a>
-                            <a href="forgot-password.php" class="btn btn-primary" style="float: right;">Forgot Password</a>
+                            <button type="submit" name="reset" class="btn btn-primary">Reset Password</button>
                         </form>
                     </div>
                 </div>
